@@ -70,6 +70,7 @@ int main()
     if (!win_divert_dll_path)
     {
         std::println(stderr, "{}", win_divert_dll_path.error());
+        system("pause");
         return static_cast<int>(errors::failed_to_find_file);
     }
 
@@ -77,12 +78,14 @@ int main()
 
     if (!win_divert_dll_file.is_open()) {
         std::println(stderr, "Failed to open file: {}", win_divert_dll_path.value().string());
+        system("pause");
         return static_cast<int>(errors::failed_to_open_file);
     }
 
     win_divert_dll_file.seekg(offsets::win_divert_dll_driver_name, std::ios::beg);
     if (!win_divert_dll_file) {
         std::println(stderr, "Offset error(offset out of file limit ? )");
+        system("pause");
         return static_cast<int>(errors::failed_to_file_offset);
     }
 
@@ -105,6 +108,7 @@ int main()
     } catch (const fs::filesystem_error& e)
     {
         std::println(stderr, "Failed to rename {}", e.what());
+        system("pause");
         return static_cast<int>(errors::failed_to_rename_file);
     }
 
@@ -112,6 +116,7 @@ int main()
 
     if (!patcher.is_open()) {
         std::println(stderr, "Failed to open file for patching!");
+        system("pause");
         return static_cast<int>(errors::failed_to_open_file);
     }
 
@@ -136,6 +141,8 @@ int main()
 
     patcher.close();
     std::println("{}Successfully patched DLL at offset 0x{:X} with '{}'{}", color::green, offsets::win_divert_dll_driver_name, gen_name, color::reset);
+
+    system("pause");
 
 	return 0;
 }
