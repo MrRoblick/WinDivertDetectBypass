@@ -12,6 +12,6 @@ endif()
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "include/*.h")
 
-add_executable (${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable (${PROJECT_NAME} "main.cpp" ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ./include)
